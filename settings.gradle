@@ -1,0 +1,5 @@
+rootProject.name = 'musinsa-assignment'
+include 'backoffice'
+include 'api'
+include 'core'
+
