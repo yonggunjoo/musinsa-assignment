@@ -1,6 +1,6 @@
 package com.musinsa.domain.category.service;
 
-import com.musinsa.common.entity.Category;
+import com.musinsa.entity.Category;
 import com.musinsa.domain.category.repository.CategoryRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

@@ -1,7 +1,7 @@
 package com.musinsa.domain.brand.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.musinsa.common.entity.Brand;
+import com.musinsa.entity.Brand;
 import lombok.Builder;
 import lombok.Data;
 

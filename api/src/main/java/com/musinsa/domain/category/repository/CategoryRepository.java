@@ -1,6 +1,6 @@
 package com.musinsa.domain.category.repository;
 
-import com.musinsa.common.entity.Category;
+import com.musinsa.entity.Category;
 import com.musinsa.domain.category.dto.CategoryLowestPriceDTO;
 import com.musinsa.domain.category.dto.CategoryPriceSearchDTO;
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -1,4 +1,4 @@
-package com.musinsa.common.entity;
+package com.musinsa.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

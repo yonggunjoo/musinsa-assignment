@@ -1,4 +1,4 @@
-package com.musinsa.common.entity;
+package com.musinsa.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -9,12 +9,12 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 
 @Entity
-@Table(name = "BRAND")
+@Table(name = "CATEGORY")
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Brand {
+public class Category {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,7 +23,6 @@ public class Brand {
     @Column(nullable = false)
     private String name;
 
-    @OneToMany(mappedBy = "brand", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
     private List<Product> products;
-
 }

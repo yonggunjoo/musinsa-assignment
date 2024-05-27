@@ -1,6 +1,6 @@
 package com.musinsa.domain.category.dto;
 
-import com.musinsa.common.entity.Category;
+import com.musinsa.entity.Category;
 import lombok.Builder;
 import lombok.Data;
 

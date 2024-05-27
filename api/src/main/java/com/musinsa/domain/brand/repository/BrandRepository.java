@@ -1,6 +1,6 @@
 package com.musinsa.domain.brand.repository;
 
-import com.musinsa.common.entity.Category;
+import com.musinsa.entity.Category;
 import com.musinsa.domain.brand.dto.BrandLowestPriceDTO;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;

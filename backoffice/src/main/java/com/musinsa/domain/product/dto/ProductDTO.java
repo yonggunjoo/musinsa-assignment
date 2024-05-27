@@ -1,7 +1,7 @@
 package com.musinsa.domain.product.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.musinsa.common.entity.Product;
+import com.musinsa.entity.Product;
 import com.musinsa.domain.brand.dto.BrandDTO;
 import com.musinsa.domain.category.dto.CategoryDTO;
 import lombok.Builder;

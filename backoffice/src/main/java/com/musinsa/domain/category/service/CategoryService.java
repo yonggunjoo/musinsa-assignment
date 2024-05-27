@@ -1,7 +1,7 @@
 package com.musinsa.domain.category.service;
 
 
-import com.musinsa.common.entity.Category;
+import com.musinsa.entity.Category;
 
 public interface CategoryService {
     boolean existsByName(String name);

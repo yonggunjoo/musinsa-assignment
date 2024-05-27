@@ -1,8 +1,8 @@
 package com.musinsa.domain.product.repository;
 
-import com.musinsa.common.entity.Brand;
-import com.musinsa.common.entity.Category;
-import com.musinsa.common.entity.Product;
+import com.musinsa.entity.Brand;
+import com.musinsa.entity.Category;
+import com.musinsa.entity.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
