@@ -61,14 +61,14 @@ api, backoffice 모듈에서 공통으로 사용되는 기능을 제공
 | Column Name | Data Type    | Constraints                | Description |
 |-------------|--------------|----------------------------|-------------|
 | id          | INT          | AUTO_INCREMENT,PRIMARY KEY | BRAND ID    |
-| name        | VARCHAR(255) | NOT NULL UNIQUE            | 금액          |
+| name        | VARCHAR(255) | NOT NULL UNIQUE            | 브랜드명        |
 
 ### [카테고리 테이블] CATEGORY
 
 | Column Name | Data Type    | Constraints                | Description |
 |-------------|--------------|----------------------------|-------------|
 | id          | INT          | AUTO_INCREMENT,PRIMARY KEY | 카테고리 ID     |
-| name        | VARCHAR(255) | NOT NULL UNIQUE            | 금액          |
+| name        | VARCHAR(255) | NOT NULL UNIQUE            | 카테고리명       |
 
 ### [상품테이블] PRODUCT
 
@@ -103,9 +103,6 @@ $ ./gradlew clean :backoffice:test
 
 ### api module
 ```
-// 테스트 코드 실행
-$ ./gradlew clean :api:test  
-
 $ ./gradlew :api:clean :api:build :api:bootRun -x test 
 ```
 
