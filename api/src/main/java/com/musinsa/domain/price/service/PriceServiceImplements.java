@@ -1,10 +1,11 @@
-package com.musinsa.domain.category.service;
+package com.musinsa.domain.price.service;
 
 import com.musinsa.common.utils.DecimalFormatterUtil;
-import com.musinsa.domain.category.dto.CategoryLowestPriceDTO;
-import com.musinsa.domain.category.dto.CategoryPriceSearchDTO;
-import com.musinsa.domain.category.exception.CategoryErrorCode;
-import com.musinsa.domain.category.repository.CategoryRepository;
+import com.musinsa.domain.price.dto.BrandLowestPriceDTO;
+import com.musinsa.domain.price.dto.CategoryLowestPriceDTO;
+import com.musinsa.domain.price.dto.CategoryPriceSearchDTO;
+import com.musinsa.domain.price.exception.PriceErrorCode;
+import com.musinsa.domain.price.repository.PriceRepository;
 import com.musinsa.global.common.exception.RestApiException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,13 +17,13 @@ import java.util.stream.Collectors;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class CategoryServiceImplements implements CategoryService {
+public class PriceServiceImplements implements PriceService {
 
-    private final CategoryRepository categoryRepository;
+    private final PriceRepository priceRepository;
 
     @Override
     public CategoryLowestPriceDTO.Response getCategoryLowestPriceBrand() {
-        List<CategoryLowestPriceDTO.Projection> projectionList = categoryRepository.getCategoryLowestPriceBrand();
+        List<CategoryLowestPriceDTO.Projection> projectionList = priceRepository.getCategoryLowestPriceBrand();
 
         List<CategoryLowestPriceDTO.CategoryInfo> categoryInfoList = projectionList.stream()
                 .map(dto -> new CategoryLowestPriceDTO.CategoryInfo(dto.getCategoryName(), dto.getBrandName(), DecimalFormatterUtil.format(dto.getLowestPrice())))
@@ -37,13 +38,34 @@ public class CategoryServiceImplements implements CategoryService {
     }
 
     @Override
+    public BrandLowestPriceDTO.Response getSingleBrandCategoryLowestPrice() {
+        List<BrandLowestPriceDTO.Projection> lowestPriceProjection = priceRepository.getSingleBrandCategoryLowestPrice();
+
+        List<BrandLowestPriceDTO.CategoryInfo> categoryInfo = lowestPriceProjection.stream()
+                .map(projection -> new BrandLowestPriceDTO.CategoryInfo(projection.getCategoryName(), DecimalFormatterUtil.format(projection.getCategoryPrice())))
+                .collect(Collectors.toList());
+
+        BrandLowestPriceDTO.Body body = BrandLowestPriceDTO.Body.builder()
+                .totalPrice(DecimalFormatterUtil.format(lowestPriceProjection.getFirst().getTotalPrice()))
+                .categoryInfos(categoryInfo)
+                .brandName(lowestPriceProjection.getFirst().getBrandName())
+                .build();
+
+        BrandLowestPriceDTO.Response response = BrandLowestPriceDTO.Response.builder()
+                .body(body)
+                .build();
+
+        return response;
+    }
+
+    @Override
     public CategoryPriceSearchDTO.Response getCategoryPriceSearch(String categoryName) {
 
-        List<CategoryPriceSearchDTO.Projection> lowestProjectionList = categoryRepository.getCategoryLowestPriceInfo(categoryName);
-        List<CategoryPriceSearchDTO.Projection> highestProjectionList = categoryRepository.getCategoryHighestPriceInfo(categoryName);
+        List<CategoryPriceSearchDTO.Projection> lowestProjectionList = priceRepository.getCategoryLowestPriceInfo(categoryName);
+        List<CategoryPriceSearchDTO.Projection> highestProjectionList = priceRepository.getCategoryHighestPriceInfo(categoryName);
 
         if (lowestProjectionList.isEmpty() || highestProjectionList.isEmpty()) {
-            throw new RestApiException(CategoryErrorCode.NOT_FOUND);
+            throw new RestApiException(PriceErrorCode.NOT_FOUND);
         }
 
         List<CategoryPriceSearchDTO.BrandInfo> lowerstBrandInfoList = lowestProjectionList.stream()

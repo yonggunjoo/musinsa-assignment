@@ -1,8 +1,9 @@
-package com.musinsa.domain.category.repository;
+package com.musinsa.domain.price.repository;
 
-import com.musinsa.entity.Category;
-import com.musinsa.domain.category.dto.CategoryLowestPriceDTO;
-import com.musinsa.domain.category.dto.CategoryPriceSearchDTO;
+import com.musinsa.domain.price.dto.BrandLowestPriceDTO;
+import com.musinsa.domain.price.dto.CategoryLowestPriceDTO;
+import com.musinsa.domain.price.dto.CategoryPriceSearchDTO;
+import com.musinsa.entity.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -11,7 +12,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface CategoryRepository extends JpaRepository<Category, Long> {
+public interface PriceRepository extends JpaRepository<Product, Long> {
 
     @Query(value = "WITH CategoryLowestPrice AS (\n" +
             "    SELECT\n" +
@@ -43,6 +44,42 @@ public interface CategoryRepository extends JpaRepository<Category, Long> {
             "ORDER BY\n" +
             "    clp.CATEGORY_ID;", nativeQuery = true)
     List<CategoryLowestPriceDTO.Projection> getCategoryLowestPriceBrand();
+
+    @Query(value = "WITH BrandTotalPrice AS (\n" +
+            "    SELECT\n" +
+            "        b.ID AS brandId,\n" +
+            "        b.NAME AS brandName,\n" +
+            "        SUM(p.PRICE) AS totalPrice\n" +
+            "    FROM\n" +
+            "        PRODUCT p\n" +
+            "    JOIN\n" +
+            "        BRAND b ON p.BRAND_ID = b.ID\n" +
+            "    GROUP BY\n" +
+            "        b.ID, b.NAME\n" +
+            "),\n" +
+            "MinBrandTotalPrice AS (\n" +
+            "    SELECT\n" +
+            "        btp.brandId,\n" +
+            "        btp.brandName,\n" +
+            "        btp.totalPrice\n" +
+            "    FROM\n" +
+            "        BrandTotalPrice btp\n" +
+            "    WHERE\n" +
+            "        btp.totalPrice = (SELECT MIN(totalPrice) FROM BrandTotalPrice)\n" +
+            ")\n" +
+            "SELECT\n" +
+            "    mbtp.brandName AS brandName,\n" +
+            "    c.NAME AS categoryName,\n" +
+            "    p.PRICE AS categoryPrice,\n" +
+            "    mbtp.totalPrice AS totalPrice\n" +
+            "FROM\n" +
+            "    MinBrandTotalPrice mbtp\n" +
+            "JOIN\n" +
+            "    PRODUCT p ON mbtp.brandId = p.BRAND_ID\n" +
+            "JOIN\n" +
+            "    CATEGORY c ON p.CATEGORY_ID = c.ID;\n"
+            , nativeQuery = true)
+    List<BrandLowestPriceDTO.Projection> getSingleBrandCategoryLowestPrice();
 
     @Query(value = "WITH CategoryLowestPrice AS (\n" +
             "    SELECT\n" +

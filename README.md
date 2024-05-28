@@ -7,6 +7,7 @@ Language : Java 21
 Framework : Spring boot 3.2.4
 Build : Gradle 8.7
 Database : H2
+Doc : Swagger
 ```
 
 ## 프로젝트 구조(multi module)
@@ -34,10 +35,11 @@ musinsa-assignment
 <b> 요구사항 1,2,3) 클라이언트 요청 결과를 반환하는 API 기능 구현</b> <br/>
 
 ```
-  1. 카테고리 별 최저가격 브랜드와 상품 가격, 총액을 조회하는 API
-  2. 단일 브랜드로 모든 카테고리 상품을 구매할 때 최저가격에 판매하는 브랜드와 카테고리의 상품가격, 총액을
-     조회하는 API
-  3. 카테고리 이름으로 최저, 최고 가격 브랜드와 상품 가격을 조회하는 API
+1. 카테고리 별 최저가격 브랜드와 상품 가격, 총액을 조회하는 API
+2. 단일 브랜드로 모든 카테고리 상품을 구매할 때 최저가격에 판매하는 브랜드와 카테고리의 상품가격, 총액을
+ 조회하는 API
+3. 카테고리 이름으로 최저, 최고 가격 브랜드와 상품 가격을 조회하는 API
+4. Unit test 및 Integration test 작성
 ```
 
 ### backoffice module
@@ -45,7 +47,8 @@ musinsa-assignment
 <b> 요구사항 4) 브랜드 및 상품을 추가 / 업데이트 / 삭제 API 기능 구현</b> <br/>
 
 ```
-브랜드 및 상품을 추가 / 업데이트 / 삭제하는 API
+1. 브랜드 및 상품을 추가 / 업데이트 / 삭제하는 API
+2. Unit test 및 Integration test 작성
 ```
 
 ### core module
@@ -63,16 +66,30 @@ $ git clone https://github.com/yonggunjoo/musinsa-assignment.git
 cd musinsa-assignment
 ```
 
-## Build and Run
+## Build And Run
 
 ### api module
-
 ```
-$ ./gradlew :api:clean :api:build :api:bootRun  
+// 테스트 코드 실행
+$ ./gradlew clean :api:test  
+
+$ ./gradlew :api:clean :api:build :api:bootRun -x test 
 ```
 
 ### backoffice module
-
 ```
-$ ./gradlew :backoffice:clean :backoffice:build :backoffice:bootRun  
+// 테스트 코드 실행
+$ ./gradlew clean :backoffice:test  
+
+$ ./gradlew :backoffice:clean :backoffice:build :backoffice:bootRun -x test
+```
+
+## Swagger URL
+### api
+```
+localhost:8081/api/swagger-ui/index.html
+```
+### backoffice
+```
+localhost:8082/admin/swagger-ui/index.html
 ```
