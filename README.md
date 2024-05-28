@@ -65,6 +65,11 @@ api, backoffice 모듈에서 공통으로 사용되는 기능을 제공
 $ git clone https://github.com/yonggunjoo/musinsa-assignment.git
 cd musinsa-assignment
 ```
+## Module Test
+```
+$ ./gradlew clean :api:test  
+$ ./gradlew clean :backoffice:test  
+```
 
 ## Build And Run
 
@@ -78,9 +83,6 @@ $ ./gradlew :api:clean :api:build :api:bootRun -x test
 
 ### backoffice module
 ```
-// 테스트 코드 실행
-$ ./gradlew clean :backoffice:test  
-
 $ ./gradlew :backoffice:clean :backoffice:build :backoffice:bootRun -x test
 ```
 
