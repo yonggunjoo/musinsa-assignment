@@ -13,14 +13,12 @@ Doc : Swagger
 ## 프로젝트 구조(multi module)
 
 ```
-musinsa-assignment
-├─ api
-├─ backoffice
-└─ core
+musinsa-assignment [multimodule-root]
+├─ api             [API 모듈]
+├─ backoffice      [관리자 모듈]
+└─ core            [공통 모듈]
 ```
-
 ## 요구사항
-
 ```
 1. 고객은 카테고리 별로 최저가격인 브랜드와 가격을 조회하고 총액이 얼마인지 확인할 수 있어야 합니다.
 2. 고객은 단일 브랜드로 전체 카테고리 상품을 구매할 경우 최저가격인 브랜드와 총액이 얼마인지 확인할 수 있어야 합니다.
@@ -56,6 +54,36 @@ musinsa-assignment
 ```
 api, backoffice 모듈에서 공통으로 사용되는 기능을 제공
 ```
+## 테이블 구조
+
+### [브랜드 테이블] BRAND
+
+| Column Name | Data Type    | Constraints                | Description |
+|-------------|--------------|----------------------------|-------------|
+| id          | INT          | AUTO_INCREMENT,PRIMARY KEY | BRAND ID    |
+| name        | VARCHAR(255) | NOT NULL UNIQUE            | 금액          |
+
+### [카테고리 테이블] CATEGORY
+
+| Column Name | Data Type    | Constraints                | Description |
+|-------------|--------------|----------------------------|-------------|
+| id          | INT          | AUTO_INCREMENT,PRIMARY KEY | 카테고리 ID     |
+| name        | VARCHAR(255) | NOT NULL UNIQUE            | 금액          |
+
+### [상품테이블] PRODUCT
+
+| Column Name | Data Type | Constraints                | Description |
+|-------------|-----------|----------------------------|-------------|
+| id          | INT       | AUTO_INCREMENT,PRIMARY KEY | 상품 ID       |
+| brand_id    | BIGINT    | FOREIGN KEY                | 브랜드 ID      |
+| category_id | BIGINT    | FOREIGN KEY                | 카테고리 ID     |
+| price       | BIGINT    |                            | 금액          |
+
+## ENTITY 설계
+#### BRAND(1) : PRODUCT(N) / OneToMany
+#### CATEGORY(1) : PRODUCT(N) / OneToMany
+#### PRODUCT(N) : BRAND(1) / ManyToOne
+#### PRODUCT(N) : CATEGORY(1) / ManyToOne
 
 ## 프로젝트 실행 방법
 
