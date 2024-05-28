@@ -1,7 +1,7 @@
 package com.musinsa.domain.brand.service;
 
 
-import com.musinsa.common.entity.Brand;
+import com.musinsa.entity.Brand;
 import com.musinsa.domain.brand.dto.BrandDTO;
 import com.musinsa.domain.brand.dto.request.CreateBrandRequest;
 import com.musinsa.domain.brand.dto.request.DeleteBrandRequest;

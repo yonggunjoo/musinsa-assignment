@@ -1,8 +1,8 @@
 package com.musinsa.domain.product.service;
 
-import com.musinsa.common.entity.Brand;
-import com.musinsa.common.entity.Category;
-import com.musinsa.common.entity.Product;
+import com.musinsa.entity.Brand;
+import com.musinsa.entity.Category;
+import com.musinsa.entity.Product;
 import com.musinsa.domain.brand.exception.BrandErrorCode;
 import com.musinsa.domain.brand.service.BrandService;
 import com.musinsa.domain.category.exception.CategoryErrorCode;

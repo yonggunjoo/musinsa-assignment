@@ -32,3 +32,13 @@ spring:
       hibernate:
         format_sql: true
         use_sql_comments: true
+
+  swagger-ui:
+    path: /swagger-ui.html
+    enable: true
+    groups-order: DESC
+    operations-sorter: method
+    tags-sorter: method
+  cache:
+    disabled: true
+  model-and-view-allowwd: false
