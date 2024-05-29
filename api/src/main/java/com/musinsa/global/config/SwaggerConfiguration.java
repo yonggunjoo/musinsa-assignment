@@ -14,9 +14,9 @@ public class SwaggerConfiguration {
     public OpenAPI customOpenAPI() {
         return new OpenAPI()
                 .info(new Info()
-                        .title("musinsa-assignment-backoffice")
+                        .title("musinsa-assignment-api")
                         .version("1.0")
-                        .description("backoffice API")
+                        .description("client API")
                 );
     }
 }
